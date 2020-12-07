@@ -18,5 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::patch('/home/{id}', 'HomeControllerr@update')->name('user.update');
+Route::patch('/home/{id}', 'HomeController@update')->name('user.update');
 Route::get('/profile', 'HomeController@profile');
