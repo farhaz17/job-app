@@ -19,4 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::patch('/home/{id}', 'HomeController@update')->name('user.update');
-Route::get('/profile', 'HomeController@profile');
+Route::get('/profile/{id}', 'HomeController@profile');
+Route::get('/home/edit/{id}', 'HomeController@edit');
+Route::delete('/home/delete/{id}', 'HomeController@destroy')->name('destroy');
+
+Route::get('/job', 'JobsController@apply')->name('job');;
+Route::post('/job', 'JobsController@postApply');

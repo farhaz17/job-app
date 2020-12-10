@@ -5,52 +5,17 @@ namespace App\Http\Controllers;
 use App\Job;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class JobsController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
+    public function apply() {
+
+        return view("job-form");
+
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        $users = Job::get();
-        return view("application-list", compact('users'));
-    }
 
-    public function edit($id)
-    {
-        $user = Job::where('id',$id)->first();
-        return view("home", compact('user'));
-    }
-
-    public function destroy($id)
-    {
-        Job::destroy($id);
-
-        return redirect()->route('home')
-                        ->with('success','Deleted successfully');
-    }
-
-    public function profile($id)
-    {
-        $user = Job::where('id', $id)->first();
-        return view("profile", compact('user'));
-    }
-
-    public function update(Request $request, $id)
+    public function postApply(Request $request)
     {
         $this->validate($request, array(
             'designation' => 'required',
@@ -58,7 +23,7 @@ class HomeController extends Controller
             'last_name' => 'required',
         ));
 
-        $job = Job::findOrFail($id);
+        $job = new Job();
 
         if($file = $request->file('resume')) {
             $imageName = time().'.'.$file->getClientOriginalExtension();
@@ -75,13 +40,14 @@ class HomeController extends Controller
         $job->state = $request->state;
         $job->postal = $request->postal;
         $job->country = $request->country;
+        $job->email = $request->email;
         $job->area_code = $request->area_code;
         $job->phone = $request->phone_no;
         $job->designation = $request->designation;
         $job->start_date = $request->start_date;
         $job->save();
 
-        return redirect()->route('home')
-                        ->with('success','Details updated successfully.');
+        return redirect()->route('job')
+                        ->with('success','Application Submitted successfully.');
     }
 }

@@ -2,17 +2,6 @@
 
 @section('content')
 
-<div class="m-3 container">
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link {{ Request::is('home') ? 'active' : '' }}" href="/home">Update</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link {{ Request::is('profile') ? 'active' : '' }}" href="/profile">Profile</a>
-        </li>
-    </ul>
-</div>
-
 @if ($errors->any())
     <div class="alert alert-danger">
         <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -29,6 +18,9 @@
         <div>{{ $message }}</div>
     </div>
 @endif
+
+<a href="/home" type="button" class="btn btn-primary m-2">Back</a>
+
 <form class="user" method="post" action="{{ route('user.update', $user->id) }}"  enctype="multipart/form-data">
     @method('PATCH')
     @csrf

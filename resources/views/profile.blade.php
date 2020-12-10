@@ -2,17 +2,7 @@
 
 @section('content')
 
-<div class="m-3 container">
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link {{ Request::is('home') ? 'active' : '' }}" href="/home">Update</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link {{ Request::is('profile') ? 'active' : '' }}" href="/profile">Profile</a>
-        </li>
-    </ul>
-</div>
-
+<a href="/home" type="button" class="btn btn-primary m-2">Back</a>
 <div class="container">
 <table>
   <tr>
